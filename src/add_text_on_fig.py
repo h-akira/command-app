@@ -6,7 +6,6 @@
 # Import
 import sys
 import os
-import numpy
 import subprocess
 
 
@@ -17,14 +16,14 @@ def main():
 """)
   parser.add_argument("--version", action="version", version='%(prog)s 0.0.1')
   parser.add_argument("-f", "--font", metavar="figure-file",default="Helvetica", help="フォントの種類")
-  parser.add_argument("-p", "--point_size", metavar="point-size", default=60, help="フォントのサイズ")
+  parser.add_argument("-s", "--font-size", metavar="font-size", default=60, help="フォントのサイズ")
   parser.add_argument("-t", "--txt", metavar="text or txt-fie", nargs='*', default="text", help="テキストまたは改行区切りのtxtファイル")
   parser.add_argument("-c", "--color", metavar="output-file", default="#000000", help="フォントのカラー")
   parser.add_argument("-o", "--output", metavar="output-dir", default="apped_text", help="output file")
   parser.add_argument("-g", "--gravity", metavar="gravity", default="northwest", help="convertの-gravity")
   parser.add_argument("-a", "--annotate", metavar="annotate", default="0x0+20+20", help="converの-annotateの第1引数")
-  parser.add_argument("-s", "--show", action="store_true", help="show file name and text")
-  parser.add_argument("-pc", "--print_command", action="store_true", help="実行コマンドを表示する")
+  parser.add_argument("--show", action="store_true", help="show file name and text")
+  parser.add_argument("-p", "--print-command", action="store_true", help="実行コマンドを表示する")
   parser.add_argument("figure", metavar="figure-file", nargs='*', help="figure file")
   options = parser.parse_args()
  
@@ -77,7 +76,7 @@ def main():
   print_command_run('mkdir -p '+options.output,shell=True,print_command=options.print_command)
   for i in range(len(figure_list)):
     print_command_run('convert -size {} xc:none transparent.png'.format(figure_size_list[i]),shell=True,print_command=options.print_command)
-    print_command_run('convert -font {0} -pointsize {1} -gravity {2} -annotate {3} "{4}" -fill "{5}" transparent.png withparticles_text.png'.format(options.font,options.point_size,options.gravity,options.annotate,text_list[i],options.color),shell=True,print_command=options.print_command)
+    print_command_run('convert -font {0} -pointsize {1} -gravity {2} -annotate {3} "{4}" -fill "{5}" transparent.png withparticles_text.png'.format(options.font,options.font_size,options.gravity,options.annotate,text_list[i],options.color),shell=True,print_command=options.print_command)
     print_command_run('composite -compose over withparticles_text.png {0} {1}'.format(figure_list[i],options.output+'/'+figure_list[i].split('/')[-1]),shell=True,print_command=options.print_command)
 
   print_command_run(['rm','transparent.png'],print_command=options.print_command)
