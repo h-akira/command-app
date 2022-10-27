@@ -13,6 +13,6 @@ pip3 install numpy
 ```
 # Mac
 brew install imagemagick
-# Linux
-sudo aput install imagemagick
+# Linux(Debian系)
+sudo apt install imagemagick
 ```
