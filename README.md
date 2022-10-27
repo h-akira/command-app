@@ -1,6 +1,18 @@
 # command-app
 ## 環境構築
+パスを通すため以下を`.zshrc`などに追記
 ```
-pip3 install puPDF2
+export PATH=$PATH:"${cloneした場所}/command-app/src"
+```
+python
+```
+pip3 install pyPDF2
 pip3 install numpy
+```
+その他
+```
+# Mac
+brew install imagemagick
+# Linux
+sudo aput install imagemagick
 ```
