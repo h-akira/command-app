@@ -46,6 +46,7 @@ def main():
     for r in rep:
       FILE=FILE.replace(r[0],r[1])
     if options.output:
+      os.makedirs(options.output)
       NEW = os.path.join(options.output,FILE)
     else:
       NEW = os.path.join(DIR,FILE)
