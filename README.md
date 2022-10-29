@@ -8,6 +8,7 @@ python
 ```
 pip3 install pyPDF2
 pip3 install numpy
+pip3 install Pillow
 ```
 その他
 ```
