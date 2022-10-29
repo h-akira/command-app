@@ -49,15 +49,18 @@ def main():
       NEW = os.path.join(options.output,FILE)
     else:
       NEW = os.path.join(DIR,FILE)
-    data.apepnd([path,NEW])
+    data.append([path,NEW])
   for row in data:
     print(row[0],'->',row[1])
   if input('以上でよろしいですか？(y/other): ')=='y':
-    if options.copy:
-      import shutil
-      shutil.copyfile(path,NEW)
-    else:
-      os.rename(path,NEW)
+    for i,row in enumerate(data):
+      print('\r'+'progress: {}/{}'.format(i,len(data)),end='')
+      if options.copy:
+        import shutil
+        shutil.copyfile(row[0],row[1])
+      else:
+        os.rename(row[0],row[1])
+    print('\r'+'progress: {}/{}\nend'.format(i+1,len(data)))
 
 if(__name__ == '__main__'):
   main()
