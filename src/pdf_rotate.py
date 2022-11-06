@@ -9,28 +9,34 @@ def main():
 pdfを回転させる．
 """)
   parser.add_argument("--version", action="version", version='%(prog)s 0.0.1')
-  parser.add_argument("-o", "--output", metavar="output-file", default="output", help="output file")
-  parser.add_argument("-r", "--reverse", action="store_true", help="デフォルトでは時計回りに90度回転するが，逆回転にする．")
-  parser.add_argument("-u", "--upside-down", action="store_true", help="180度回転させる．")
-  ## parser.add_argument('-c','--choice', choices=['aaa', 'bbb', 'ccc'],help='Please select from wsd, gcs, rice')
-  parser.add_argument("-r", "--range", metavar="min max",  nargs=2, type=int, help="適用する最初のページと最後のページ")
+  parser.add_argument("-o", "--output", metavar="output-file", default="output.pdf", help="output file")
+  parser.add_argument("-t", "--theta", metavar="回転角", type=int,default=90, help="90度刻みで時計回り")
+  parser.add_argument("-r", "--range", metavar="ページ",  nargs=2, type=int, help="適用するページ(pythonのrangeに同じく0から，以上，未満)")
   parser.add_argument("file", metavar="input-file", help="input file")
   options = parser.parse_args()
-  ## options, args = parser.parse_known_args()
-  ## options.config = args
-  
+
   # Import
   import sys
   import os
-  import numpy
+  import PyPDF2
   
-  # Initial Read
-  if(not os.path.isfile(options.file)):
-    raise Exception("The input file does not exist.")
-  global end
-  end = ">"
-  if(options.little): end = "<"
+  if options.theta%90!=0:
+    print('回転角は90で割り切れる必要があります．')
+    sys.exit()
+  
+  reader = PyPDF2.PdfFileReader(options.file)
+  writer = PyPDF2.PdfFileWriter()
 
+  if not options.range:
+    options.range = [0,reader.getNumPages()]
+  for i in range(reader.getNumPages()):
+    page = reader.getPage(i)
+    if options.range[0] <= i < options.range[1]:
+      page.rotateClockwise(options.theta)
+    writer.addPage(page)
+
+  with open(options.output, mode='wb') as f:
+    writer.write(f)
 
 if(__name__ == '__main__'):
   main()
