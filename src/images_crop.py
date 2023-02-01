@@ -23,7 +23,7 @@ def main():
   import os
   from PIL import Image
 
-  os.makedirs(options.output)
+  os.makedirs(options.output,exist_ok=True)
 
   for i,path in enumerate(options.files):
     print('\rprogress: {}/{}'.format(i,len(options.files)),end='')
