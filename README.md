@@ -9,6 +9,7 @@ python
 pip3 install pyPDF2
 pip3 install numpy
 pip3 install Pillow
+pip3 install img2pdf
 ```
 その他
 ```
