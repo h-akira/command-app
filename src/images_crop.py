@@ -14,7 +14,7 @@ def main():
   parser.add_argument("-o", "--output", metavar="output-dir", default='OUTPUT', help="output file")
   ## parser.add_argument("-c", "--copy", action="store_true", help="リネームではなくコピーする")
   ## parser.add_argument("-s", "--screenshot", action="store_true", help="「スクリーンショット」をscreenshotにする")
-  parser.add_argument("-p", "--position", metavar="ピクセル",  nargs=4, default=[1920,1100,3840,2200], help="左上の座標xy，右下の座標xy")
+  parser.add_argument("-p", "--position", metavar="ピクセル",  nargs=4, type=int, default=[1920,1100,3840,2200], help="左上の座標xy，右下の座標xy")
   parser.add_argument("files", metavar="input-files", nargs='*', help="input files")
   options = parser.parse_args()
 
@@ -32,5 +32,5 @@ def main():
     im_crop.save(os.path.join(options.output,os.path.basename(path)), quality=95)
   print('\rprogress: {}/{}\nend'.format(i+1,len(options.files)))
 
-if(__name__ == '__main__'):
+if(__name__ == '__main__'): 
   main()
