@@ -11,7 +11,7 @@ import re
 def parse_args():
   import argparse
   parser = argparse.ArgumentParser(description="""\
-ファイル名を変更する．
+Windowsのスクリーンショットのファイル名を変更する．
 """, formatter_class = argparse.ArgumentDefaultsHelpFormatter)
   parser.add_argument("--version", action="version", version='%(prog)s 0.0.1')
   parser.add_argument("--input-format", metavar="format", default="スクリーンショット\ \([0-9]+\).png", help="入力ファイルのフォーマット")
