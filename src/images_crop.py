@@ -9,7 +9,7 @@ def main():
 複数の画像を引数に取り，指定した位置で切り抜く．
 ファイル名はそのままで，指定したディレクトリに保存される．
 マルチディスプレイのスクリーンショットから不要な部分を一括で処理することを主に想定している．
-""")
+""", formatter_class = argparse.ArgumentDefaultsHelpFormatter)
   parser.add_argument("--version", action="version", version='%(prog)s 0.0.1')
   parser.add_argument("-o", "--output", metavar="output-dir", default='OUTPUT', help="output file")
   ## parser.add_argument("-c", "--copy", action="store_true", help="リネームではなくコピーする")

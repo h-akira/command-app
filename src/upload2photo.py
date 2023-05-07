@@ -3,7 +3,6 @@
 #
 # Created: 2023-02-22 18:11:41
 
-import sys
 import os
 import json
 import requests

@@ -7,7 +7,7 @@ def main():
   import argparse
   parser = argparse.ArgumentParser(description="""\
 ファイル内の文字列を置き換える．
-""")
+""", formatter_class = argparse.ArgumentDefaultsHelpFormatter)
   parser.add_argument("--version", action="version", version='%(prog)s 0.0.1')
   parser.add_argument("-r", "--replace", metavar="文字列", default=False, nargs=2, help="文字列を置き換える")
   parser.add_argument("-o", "--output", metavar="output-file", help="output file")

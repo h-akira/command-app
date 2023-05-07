@@ -7,7 +7,7 @@ def main():
   import argparse
   parser = argparse.ArgumentParser(description="""\
 意味の無い計算をし，経過時間からマシンの性能を評価する．
-""")
+""", formatter_class = argparse.ArgumentDefaultsHelpFormatter)
   parser.add_argument("--version", action="version", version='%(prog)s 0.0.1')
   parser.add_argument("-s", "--size", metavar="数字", type=int, default=1000, help="配列のサイズ（2以上）")
   parser.add_argument("-n", "--number", metavar="数字", type=int, default=10, help="計算回数（1000倍される）")

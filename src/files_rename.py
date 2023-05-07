@@ -8,7 +8,7 @@ def main():
   parser = argparse.ArgumentParser(description="""\
 ファイル名から全角やスペースを処理する．特定のキーワードは置換される．
 主にWindowsでスクリーンショットのファイル名を変換するのを想定している．
-""")
+""", formatter_class = argparse.ArgumentDefaultsHelpFormatter)
   parser.add_argument("--version", action="version", version='%(prog)s 0.0.1')
   parser.add_argument("-o", "--output", metavar="output-file", help="output file")
   parser.add_argument("-c", "--copy", action="store_true", help="リネームではなくコピーする")

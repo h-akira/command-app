@@ -7,7 +7,7 @@ def main():
   import argparse
   parser = argparse.ArgumentParser(description="""\
 pythonなどのファイルのインデントの幅を変更する．
-""")
+""", formatter_class = argparse.ArgumentDefaultsHelpFormatter)
   parser.add_argument("--version", action="version", version='%(prog)s 0.0.1')
   parser.add_argument("-o", "--output", metavar="output-file", default="output", help="output file")
   parser.add_argument("-b", "--before", metavar="幅", type=int, default=4, help="元のインデントの幅")

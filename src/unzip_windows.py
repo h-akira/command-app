@@ -7,7 +7,7 @@ def main():
   import argparse
   parser = argparse.ArgumentParser(description="""\
 windowsで圧縮されたzipファイルを解凍する
-""")
+""", formatter_class = argparse.ArgumentDefaultsHelpFormatter)
   parser.add_argument("--version", action="version", version='%(prog)s 0.0.1')
   parser.add_argument("file", metavar="input-file", help="input file")
   options = parser.parse_args()

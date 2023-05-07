@@ -13,7 +13,7 @@ def main():
   import argparse
   parser = argparse.ArgumentParser(description="""\
 画像に文字を追加する．
-""")
+""", formatter_class = argparse.ArgumentDefaultsHelpFormatter)
   parser.add_argument("--version", action="version", version='%(prog)s 0.0.1')
   parser.add_argument("-f", "--font", metavar="figure-file",default="Helvetica", help="フォントの種類")
   parser.add_argument("-s", "--font-size", metavar="font-size", default=60, help="フォントのサイズ")

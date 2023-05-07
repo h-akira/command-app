@@ -7,7 +7,7 @@ def main():
   import argparse
   parser = argparse.ArgumentParser(description="""\
 テキストファイルを結合する．
-""")
+""", formatter_class = argparse.ArgumentDefaultsHelpFormatter)
   parser.add_argument("--version", action="version", version='%(prog)s 0.0.1')
   parser.add_argument("-o", "--output", metavar="output-file", default="output.txt", help="output file")
   parser.add_argument("-s", "--sep", metavar="区切り文字", default="\n", help="区切り文字．デフォルトでは空の行が入る．")
