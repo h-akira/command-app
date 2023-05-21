@@ -27,9 +27,9 @@ def set_unit(value):
   elif value < 10**9:
     return f"\033[36m{round(value/10**6,1)}\tMB\033[0m"
   elif value < 10**12:
-    return f"\033[35m{round(value/10**6,1)}\tGB\033[0m"
+    return f"\033[35m{round(value/10**9,1)}\tGB\033[0m"
   else:
-    return f"\033[31m{round(value/10**9,1)}\tTB\033[0m"
+    return f"\033[31m{round(value/10**12,1)}\tTB\033[0m"
 
 def get_dir_size(path,symlinks=False):
   total = 0
