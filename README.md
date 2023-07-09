@@ -15,6 +15,8 @@ pip3 install img2pdf
 ```
 # Mac
 brew install imagemagick
+brew install ghostscript
 # Linux(Debian系)
 sudo apt install imagemagick
+sudo apt install ghostscript 
 ```
