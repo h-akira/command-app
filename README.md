@@ -2,7 +2,7 @@
 ## 環境構築
 パスを通すため以下を`.zshrc`などに追記
 ```
-export PATH=$PATH:"${cloneした場所}/command-app/src"
+export PATH=$PATH:"${cloneした場所}/command-app/bin"
 ```
 python
 ```
