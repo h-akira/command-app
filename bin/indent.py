@@ -12,6 +12,7 @@ pythonなどのファイルのインデントの幅を変更する．
   parser.add_argument("-o", "--output", metavar="output-file", default="output", help="output file")
   parser.add_argument("-b", "--before", metavar="幅", type=int, default=4, help="元のインデントの幅")
   parser.add_argument("-a", "--after", metavar="幅", type=int, default=2, help="変えるインデントの幅")
+  parser.add_argument("-r", "--range", metavar="行", type=int, nargs=2, help="対象の行の範囲（以上以下）")
   parser.add_argument("-p", "--print", action="store_true", help="変換後を表示して確認する")
   parser.add_argument("file", metavar="input-file", help="input file")
   options = parser.parse_args()
@@ -26,7 +27,11 @@ pythonなどのファイルのインデントの幅を変更する．
   
   f = open(options.file,mode='r')
   after_list = []
-  for row in f.readlines():
+  for n, row in enumerate(f.readlines()):
+    if options.range != None:
+      if n+1 < options.range[0] or options.range[1] < n+1:
+        after_list.append(row)
+        continue
     counter = 0
     for i in range(len(row)):
       if row[i]==' ':
