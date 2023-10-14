@@ -12,6 +12,7 @@ def parse_args():
 ファイルやディレクトリを検索する
 """, formatter_class = argparse.ArgumentDefaultsHelpFormatter)
   parser.add_argument("--version", action="version", version='%(prog)s 0.0.1')
+  parser.add_argument("-a", "--all", action="store_true", help="隠しファイルを含む")
   parser.add_argument("-r", "--root", metavar="directry", default=".", help="root directry")
   parser.add_argument("-o", "--output", metavar="output-file", default="output", help="output file")
   group = parser.add_mutually_exclusive_group()
@@ -27,6 +28,8 @@ def main():
   options = parse_args()
   # 探索対象のディレクトリ以下のファイルとディレクトリのPathをすべて取得する
   path_all = glob.glob("**", root_dir=options.root, recursive=True)
+  if options.all:
+    path_all += glob.glob("**/.*", root_dir=options.root, recursive=True) 
   for p in path_all:
     # 一致しなければ次へ
     if options.perfect:
