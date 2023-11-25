@@ -58,6 +58,7 @@ def main():
     length_list = [len(s) for s in file_list]
     max_length = min(max(length_list), options.max_display)
     adjustment = [" "*(max(max_length-length,0)) for length in length_list]
+    total = 0
     for i,a in zip(file_list,adjustment):
       if not options.all and i[0]==".":
         continue
@@ -68,6 +69,9 @@ def main():
       if os.path.isdir(path):
         size = get_dir_size(path,options.symlinks)
         print(f"{i}{a}\t: {set_unit(size)}")
+      total += size
+    print("="*(max_length + 18))
+    print(f"Total{' '*max(max_length-5,0)}\t: {set_unit(total)}")
 
 if __name__ == '__main__':
   main()
