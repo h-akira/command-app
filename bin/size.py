@@ -36,7 +36,7 @@ def get_dir_size(path,symlinks=False):
   total = 0
   with os.scandir(path) as it:
     for entry in it:
-      if entry.is_file(follow_symlinks=symlinks):
+      if entry.is_file(follow_symlinks=symlinks) and not os.path.ismount(entry.path):
         total += entry.stat().st_size
       elif entry.is_dir(follow_symlinks=symlinks):
         total += get_dir_size(entry.path)
