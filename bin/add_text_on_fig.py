@@ -34,6 +34,8 @@ def main():
   if options.transparent and len(options.figure)!=0:
     print('透明な画像に印字する場合は，画像を引数に取ることができません')
     sys.exit()
+  if not os.path.exists(options.output):
+    os.makedirs(options.output)
  
   # figureの処理
   figure_list = []
