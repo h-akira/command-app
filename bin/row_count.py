@@ -21,8 +21,14 @@ def parse_args():
 
 def main():
   options = parse_args()
-  counter = 0
+  files = []
   for file in options.files:
+    if os.path.isfile(file):
+      files.append(file)
+    else:
+      print(f"`{file}` is not a file")
+  counter = 0
+  for file in files:
     with open(file, 'r') as f:
       data = f.readlines()
       counter += len(data)
