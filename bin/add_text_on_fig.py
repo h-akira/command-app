@@ -15,7 +15,8 @@ def main():
 画像に文字を追加する．
 """, formatter_class = argparse.ArgumentDefaultsHelpFormatter)
   parser.add_argument("--version", action="version", version='%(prog)s 0.0.1')
-  parser.add_argument("-f", "--font", metavar="figure-file",default="Helvetica", help="フォントの種類")
+  # parser.add_argument("-f", "--font", metavar="figure-file",default="Helvetica", help="フォントの種類")
+  parser.add_argument("-f", "--font", metavar="figure-file",default="P052-Roman", help="フォントの種類")
   parser.add_argument("-s", "--font-size", metavar="font-size", default=60, help="フォントのサイズ")
   parser.add_argument("-t", "--txt", metavar="text or txt-fie", nargs='*', default="text", help="テキストまたは改行区切りのtxtファイル")
   parser.add_argument("-c", "--color", metavar="output-file", default="#000000", help="フォントのカラー")
@@ -23,9 +24,18 @@ def main():
   parser.add_argument("-g", "--gravity", metavar="gravity", default="northwest", help="convertの-gravity")
   parser.add_argument("-a", "--annotate", metavar="annotate", default="0x0+20+20", help="converの-annotateの第1引数")
   parser.add_argument("--show", action="store_true", help="show file name and text")
+  parser.add_argument("--transparent", action="store_true", help="透明な画像を生成してそこに文字を入れる")
+  parser.add_argument("--format", metavar="format", default="{0:04d}.png", help="出力ファイルのフォーマット")
+  parser.add_argument("--one", action="store_true", help="1からスタート")
+  parser.add_argument("--px",  metavar="annotate", nargs=2, type=int, default=[1280,1280], help="透明な画像のサイズ")
   parser.add_argument("-p", "--print-command", action="store_true", help="実行コマンドを表示する")
   parser.add_argument("figure", metavar="figure-file", nargs='*', help="figure file")
   options = parser.parse_args()
+  if options.transparent and len(options.figure)!=0:
+    print('透明な画像に印字する場合は，画像を引数に取ることができません')
+    sys.exit()
+  if not os.path.exists(options.output):
+    os.makedirs(options.output)
  
   # figureの処理
   figure_list = []
@@ -44,10 +54,11 @@ def main():
   # -tの処理
   if len(options.txt)==1:  
     try:
-      with open(options.txt[0],'rb') as fp:
+      with open(options.txt[0],'r') as fp:
         text_list = fp.read().splitlines()
         for i in range(len(text_list)):
-          text_list[i] = text_list[i].decode('utf-8')
+          # text_list[i] = text_list[i].decode('utf-8')
+          text_list[i] = text_list[i]
     except:
       text_list = [options.txt[0]]*len(figure_list)
   else:
@@ -56,6 +67,22 @@ def main():
     else:
       print('-t の引数の数がおかしいです．')
       sys.exit()
+  
+  if options.transparent:
+    CMD = f"convert -size {options.px[0]}x{options.px[1]} xc:none transparent.png"
+    print_command_run(CMD,shell=True,print_command=options.print_command)
+    # print(text_list)
+    for i,text in enumerate(text_list):
+      if options.one:
+        name = options.format.format(i+1)
+      else:
+        name = os.path.join(options.output,options.format.format(i))
+      CMD = f"convert -font {options.font} -pointsize {options.font_size} -gravity {options.gravity} -annotate {options.annotate} \"{text}\" -fill \"{options.color}\" transparent.png {name}"
+      print_command_run(CMD,shell=True,print_command=options.print_command)
+    CMD = "rm transparent.png"
+    print_command_run(CMD,shell=True,print_command=options.print_command)
+    sys.exit()
+  
 
   # サイズを得る
   figure_size_list = []
