@@ -54,7 +54,7 @@ def main():
     else:
       raise Exception
   else:
-    file_list = os.listdir(options.path)
+    file_list = sorted(os.listdir(options.path))
     length_list = [len(s) for s in file_list]
     max_length = min(max(length_list), options.max_display)
     adjustment = [" "*(max(max_length-length,0)) for length in length_list]
