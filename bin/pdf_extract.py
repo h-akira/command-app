@@ -34,7 +34,8 @@ pdfファイルを抽出する．分割時のlogのcsvファイルを指定す�
   import PyPDF2
   if options.range:
     check_extension(options.output)
-    merger = PyPDF2.PdfFileMerger()
+    # merger = PyPDF2.PdfFileMerger()
+    merger = PyPDF2.PdfMerger()
     merger.append(options.file, pages=tuple(options.range))
     merger.write(options.output)
     merger.close()
@@ -47,7 +48,8 @@ pdfファイルを抽出する．分割時のlogのcsvファイルを指定す�
     with open(options.read_log,mode='r') as f:
       for row in csv.reader(f):
         check_extension(row[0])
-        merger = PyPDF2.PdfFileMerger()
+        # merger = PyPDF2.PdfFileMerger()
+        merger = PyPDF2.PdfMerger()
         merger.append(options.file, pages=(int(row[1])-1,int(row[2])))
         print('保存中:{}'.format(os.path.join(options.output,row[0])))
         merger.write(os.path.join(options.output,row[0]))

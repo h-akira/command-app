@@ -29,13 +29,16 @@ pdfファイルを結合する．
   check_extension(options.output)
 
   import PyPDF2
-  merger = PyPDF2.PdfFileMerger()
+  # merger = PyPDF2.PdfFileMerger()
+  merger = PyPDF2.PdfMerger()
 
   log = []
   page=1
   for file_path in options.files:
     file_name = os.path.basename(file_path)
-    len_page = PyPDF2.PdfFileReader(file_path).getNumPages()
+    # len_page = PyPDF2.PdfFileReader(file_path).getNumPages()
+    # len_page = PyPDF2.PdfReader(file_path).getNumPages()
+    len_page = len(PyPDF2.PdfReader(file_path).pages)
     start_page = page
     end_page = page + len_page-1
     page += len_page
