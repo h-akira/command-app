@@ -11,6 +11,13 @@ pip3 install numpy
 pip3 install Pillow
 pip3 install img2pdf
 ```
+archlinuxの場合
+```
+paru -S python-pypdf2
+sudo pacman -S python-numpy
+sudo pacman -S python-pillow
+paru -S img2pdf
+```
 その他
 ```
 # Mac
