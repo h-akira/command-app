@@ -17,8 +17,8 @@ rm command with trash box
   parser.add_argument("--version", action="version", version='%(prog)s 0.0.1')
   parser.add_argument("-r", "--recursive", action="store_true", help="remove directories and their contents recursively")
   parser.add_argument("-f", "--force", action="store_true", help="this option is ignored")
-  parser.add_argument("-c", "--crean", action="store_true", help="clean trash box")
-  parser.add_argument("-w", "--crean-week", action="store_true", help="clean trash box over a week")
+  parser.add_argument("-c", "--clean", action="store_true", help="clean trash box")
+  parser.add_argument("-w", "--clean-week", action="store_true", help="clean trash box over a week")
   parser.add_argument("-s", "--size", action="store_true", help="show the size of the trash box")
   parser.add_argument("targets", metavar="target", nargs="*", help="file or directory")
   options = parser.parse_args()
@@ -61,14 +61,14 @@ def main():
       continue
     CMD = f"mv {target} {to}"
     done_command(CMD)
-  if options.crean:
+  if options.clean:
     if "y" == input(f"clean {DIR}? [y/other]: "):
       CMD = f"rm -rf {os.path.join(DIR, '*')}"
       done_command(CMD)
     else:
       print("abort")
       sys.exit(1)
-  elif options.crean_week:
+  elif options.clean_week:
     if "y" == input(f"clean {DIR} over a week? [y/other]: "):
       CMD = f"find {DIR} -mtime +7 -exec rm -rf {{}} \;"
       done_command(CMD)
