@@ -8,7 +8,6 @@ import os
 import subprocess
 
 DIR = os.path.join(os.environ["HOME"], ".Trash")
-print("hoge")
 
 def parse_args():
   import argparse
