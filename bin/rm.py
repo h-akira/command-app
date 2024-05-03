@@ -8,6 +8,7 @@ import os
 import subprocess
 
 DIR = os.path.join(os.environ["HOME"], ".Trash")
+print("hoge")
 
 def parse_args():
   import argparse
@@ -70,7 +71,7 @@ def main():
       sys.exit(1)
   elif options.clean_week:
     if "y" == input(f"clean {DIR} over a week? [y/other]: "):
-      CMD = f"find {DIR} -mtime +7 -exec rm -rf {{}} \;"
+      CMD = f"find {DIR} -mtime +7 -exec rm -rf {{}} \\;"
       done_command(CMD)
     else:
       print("abort")
