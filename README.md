@@ -10,6 +10,7 @@ pip3 install pyPDF2
 pip3 install numpy
 pip3 install Pillow
 pip3 install img2pdf
+pip3 install pyperclip
 ```
 archlinuxの場合
 ```
@@ -17,6 +18,7 @@ paru -S python-pypdf2
 sudo pacman -S python-numpy
 sudo pacman -S python-pillow
 paru -S img2pdf
+sudo pacman -S python-pyperclip
 ```
 その他
 ```

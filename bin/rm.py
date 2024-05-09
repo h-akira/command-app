@@ -44,15 +44,15 @@ def main():
     if not os.path.exists(target):
       print(f"{target} is not found")
       continue
-    to = os.path.join(DIR, target)
+    to = os.path.join(DIR, os.path.basename(target))
     counter = 0
     while True:
       if os.path.exists(to):
         if counter == 0:
-          to += f"({counter+1})"
+          to += f"__{counter+1}__"
           counter += 1
         else:
-          to = to[:-(3+counter//10)] + f"({counter+1})"
+          to = to[:-(5+counter//10)] + f"__{counter+1}__"
           counter += 1
       else:
         break
