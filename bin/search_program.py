@@ -30,7 +30,7 @@ def main():
   if options.recursive:
     path_all = glob.glob(f"**/*{options.extension}", root_dir=options.search_directory, recursive=options.recursive)
     if options.all:
-      path_all = glob.glob(f"**/.*{options.extension}", root_dir=options.search_directory, recursive=options.recursive)
+      path_all += glob.glob(f"**/.*{options.extension}", root_dir=options.search_directory, recursive=options.recursive)
   else:
     path_all = glob.glob(f"*{options.extension}", root_dir=options.search_directory)
     if options.all:
