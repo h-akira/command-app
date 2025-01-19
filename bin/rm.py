@@ -7,7 +7,7 @@ import sys
 import os
 import subprocess
 
-DIR = os.path.join(os.environ["HOME"], ".Trash")
+DIR = os.path.join(os.environ["HOME"], ".rm-trash")
 
 def parse_args():
   import argparse
