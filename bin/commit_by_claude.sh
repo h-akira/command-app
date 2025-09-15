@@ -15,5 +15,14 @@ MESSAGE=$(claude -p "You are git commit message generator. Generate a concise an
 echo "=== Generated commit message ==="
 echo $MESSAGE
 echo "================================"
-git commit -m "$MESSAGE"
+echo "Commit with this message? (y/N): "
+read -r CONFIRM
+
+if [ "$CONFIRM" = "y" ] || [ "$CONFIRM" = "Y" ]; then
+  git commit -m "$MESSAGE"
+  echo "Committed successfully!"
+else
+  echo "Commit cancelled"
+fi
+
 rm /tmp/git_diff.txt
