@@ -18,9 +18,9 @@ if [ ! -s /tmp/git_diff.txt ]; then
 fi
 
 if [ "$JAPANESE" = true ]; then
-  MESSAGE=$(claude -p "You are git commit message generator. Generate a concise and descriptive git commit message in Japanese based on the following git diff output. The commit message should be in the imperative mood and summarize the changes made in the diff. Output only the commit message, no additional text or attribution. Do not include any reference to Claude, AI, or automated generation. Here is the git diff output:" < /tmp/git_diff.txt)
+  MESSAGE=$(claude -p "Generate a git commit message in Japanese based on the git diff below. IMPORTANT: Output ONLY the commit message itself with no introductory text, no explanations, no markdown formatting (no backticks), and no references to AI or Claude. Start directly with the commit message. The message should be concise, in imperative mood, and summarize the changes. Git diff:" < /tmp/git_diff.txt)
 else
-  MESSAGE=$(claude -p "You are git commit message generator. Generate a concise and descriptive git commit message in English based on the following git diff output. The commit message should be in the imperative mood and summarize the changes made in the diff. Output only the commit message, no additional text or attribution. Do not include any reference to Claude, AI, or automated generation. Here is the git diff output:" < /tmp/git_diff.txt)
+  MESSAGE=$(claude -p "Generate a git commit message in English based on the git diff below. IMPORTANT: Output ONLY the commit message itself with no introductory text, no explanations, no markdown formatting (no backticks), and no references to AI or Claude. Start directly with the commit message. The message should be concise, in imperative mood, and summarize the changes. Git diff:" < /tmp/git_diff.txt)
 fi
 echo "=== Generated commit message ==="
 echo $MESSAGE
