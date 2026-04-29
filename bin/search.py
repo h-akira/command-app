@@ -38,15 +38,16 @@ def main():
     else:
       if options.target not in os.path.basename(p):
         continue
+    full_path = os.path.join(options.root, p)
     # シンボリックリンクを指定している場合はシンボリックリンクでなければ次へ
-    if options.link and not options.link:
+    if options.link and not os.path.islink(full_path):
       continue
     # 指定に従って出力する
     if options.file:
-      if os.path.isfile(p):
+      if os.path.isfile(full_path):
         print(p)
     elif options.directory:
-      if os.path.isdir(p):
+      if os.path.isdir(full_path):
         print(p)
     else:
       print(p)
