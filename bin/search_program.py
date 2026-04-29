@@ -36,13 +36,14 @@ def main():
     if options.all:
       path_all = glob.glob(f".*{options.extension}", root_dir=options.search_directory)
   for p in path_all:
-    if os.path.isfile(p):
+    full_path = os.path.join(options.search_directory, p)
+    if os.path.isfile(full_path):
       flag = True
-      with open(p, "r") as f:
+      with open(full_path, "r") as f:
         for i,line in enumerate(f):
           if options.keyword in line:
             if flag:
-              print(f"\033[33m\"{p}\"\033[0m")
+              print(f"\033[33m\"{full_path}\"\033[0m")
               flag = False
             print(f"\033[33m{i+1}\033[0m:\t", end="")
             print(f"{highlight(line.strip(), options.keyword)}")
